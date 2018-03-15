@@ -3,16 +3,75 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>API Weather App</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content class="outer-content">
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <!-- Graphic -->
+  <ion-list>
+    <ion-item [ngStyle]="{'background-color':bannerBackground}">
+      <div class="weather-img">
+        <img *ngIf="weather.weather_state_abbr" src="https://www.metaweather.com/static/img/weather/{{weather.weather_state_abbr}}.svg">
+      </div>
+    </ion-item>
+  </ion-list>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <!-- Overview -->
+  <ion-list>
+    <ion-list-header>
+      Overview
+    </ion-list-header>
+    <ion-item>
+      <h2>{{weather.title || "..."}}</h2>
+      <p>{{weather.weather_state_name || "..."}}</p>
+      <button ion-button clear item-end class="button-refresh" (click)="refreshData()">
+        <ion-icon name="refresh"></ion-icon>
+      </button>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Temperature
+      </ion-label>
+      <ion-icon name='ios-thermometer-outline' item-start></ion-icon>
+      <span item-end>{{(weather.the_temp | number : '1.2-2') || "..."}} °{{units}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Time
+      </ion-label>
+      <ion-icon name='ios-time-outline' item-start></ion-icon>
+      <span item-end>{{(weather.time | amDateFormat:'hh:mmA') || "..."}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Date
+      </ion-label>
+      <ion-icon name='ios-calendar-outline' item-start></ion-icon>
+      <span item-end>{{(weather.time | amDateFormat:'MMMM Do YYYY') || "..."}}</span>
+    </ion-item>
+  </ion-list>
+
+  <!-- Details -->
+  <ion-list>
+    <ion-list-header>
+      Details
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        Sunrise
+      </ion-label>
+      <ion-icon name='ios-sunny-outline' item-start></ion-icon>
+      <span item-end>{{(weather.sun_rise | amDateFormat:'hh:mmA') || "..."}}</span>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        Sunset
+      </ion-label>
+      <ion-icon name='ios-moon-outline' item-start></ion-icon>
+      <span item-end>{{(weather.sun_set | amDateFormat:'hh:mmA') || "..."}}</span>
+    </ion-item>
+  </ion-list>
+
 </ion-content>
