@@ -1,6 +1,6 @@
 {
   "name": "apiWeatherApp",
-  "app_id": "",
+  "app_id": "4dfb3144",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

@@ -8,7 +8,7 @@ import { ToastProvider } from "../providers/toast";
 
 @Injectable()
 export class ApiProvider {
-  // location of the api
+  // location
   url: string = "https://www.metaweather.com/api";
 
   constructor(
@@ -21,7 +21,6 @@ export class ApiProvider {
   get(endpoint: string, params?: any) {
     let options = new RequestOptions();
 
-    // use url search params to pass params
     if (params) {
       let p = new URLSearchParams();
       for (let k in params) {
